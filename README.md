@@ -207,49 +207,6 @@ Scores come from real **CVSS v3.1 base score calculation** (FIRST.org formula), 
 
 ---
 
-## Writing a New Module
-
-Every module declares its patterns at the class level. The loader collects them all before any module runs — your patterns cost zero extra file I/O:
-
-```python
-from godseye.engine.base_module import BaseModule
-from godseye.engine.loader import AnalysisContext
-from godseye.engine.tokenizer import RuleSpec, FileScope, Resolution
-from godseye.models import Finding, CVSSVector, SkillType
-import re
-
-class MyModule(BaseModule):
-    SKILL_NAME = "My Skill"
-    SKILL_TYPE = SkillType.ACTIVE
-    CATEGORY = "E3"
-    DESCRIPTION = "What this finds"
-
-    RULE_SPECS = [
-        # Plain match
-        RuleSpec("MY-RULE", re.compile(r"dangerous_pattern"),
-                 scope=FileScope.JS_NONVENDOR),
-        # Anchor: resolve the enclosing function body
-        RuleSpec("MY-ANCHOR", re.compile(r"addListener\("),
-                 scope=FileScope.JS_NONVENDOR, resolution=Resolution.BLOCK),
-        # Storage object: resolve the next balanced {…}
-        RuleSpec("MY-STORE", re.compile(r"storage\.set\s*\("),
-                 scope=FileScope.JS_NONVENDOR, resolution=Resolution.OBJECT_LITERAL),
-    ]
-
-    def run(self, ctx: AnalysisContext) -> list[Finding]:
-        self._findings = []
-        for span in ctx.index.get("MY-ANCHOR"):
-            body = span.block.text if span.block else ""
-            # body is the actual resolved handler body, not a char-count window
-            if "bad_pattern" in body:
-                self._add(Finding(id="MY-RULE", ...))
-        return self._findings
-```
-
-Then add it to `ALL_MODULES` in `engine/orchestrator.py`.
-
----
-
 ## Coverage & Limitations
 
 **Works well on:** readable, unminified JS/HTML with a valid `manifest.json` (MV2 or MV3, Chrome/Edge/Firefox).
