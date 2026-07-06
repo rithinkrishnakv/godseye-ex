@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+.venv/
+venv/
+env/
+
+# Reports (generated at runtime — not committed)
+*.sarif
+*.json
+report.html
+report_*.html
+diff.html
+/report*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Coverage
+.coverage
+htmlcov/
+
+# Temp
+*.tmp
+*.bak
+/tmp/

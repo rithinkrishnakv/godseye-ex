@@ -1,0 +1,129 @@
+<svg width="900" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0b0d"/>
+      <stop offset="50%" style="stop-color:#1a0a2e"/>
+      <stop offset="100%" style="stop-color:#0a0b0d"/>
+    </linearGradient>
+    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#c084fc"/>
+      <stop offset="40%" style="stop-color:#e879f9"/>
+      <stop offset="70%" style="stop-color:#818cf8"/>
+      <stop offset="100%" style="stop-color:#c084fc"/>
+      <animateTransform attributeName="gradientTransform" type="translate" from="-1 0" to="1 0" dur="3s" repeatCount="indefinite"/>
+    </linearGradient>
+    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#7c3aed;stop-opacity:0"/>
+      <stop offset="30%" style="stop-color:#a855f7"/>
+      <stop offset="70%" style="stop-color:#6366f1"/>
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="softglow">
+      <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <pattern id="grid" width="30" height="30" patternUnits="userSpaceOnUse">
+      <path d="M 30 0 L 0 0 0 30" fill="none" stroke="#1e1b4b" stroke-width="0.5" opacity="0.4"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="200" fill="url(#bgGrad)" rx="12"/>
+  <rect width="900" height="200" fill="url(#grid)" rx="12"/>
+
+  <!-- Animated scan line sweeping the whole banner -->
+  <rect x="0" y="0" width="3" height="200" fill="url(#lineGrad)" opacity="0.6" rx="12">
+    <animateTransform attributeName="transform" type="translate" from="-3 0" to="903 0" dur="2.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- Corner decorations -->
+  <rect x="12" y="12" width="24" height="3" fill="#7c3aed" opacity="0.8"/>
+  <rect x="12" y="12" width="3" height="24" fill="#7c3aed" opacity="0.8"/>
+  <rect x="864" y="12" width="24" height="3" fill="#6366f1" opacity="0.8"/>
+  <rect x="885" y="12" width="3" height="24" fill="#6366f1" opacity="0.8"/>
+  <rect x="12" y="185" width="24" height="3" fill="#7c3aed" opacity="0.8"/>
+  <rect x="12" y="161" width="3" height="24" fill="#7c3aed" opacity="0.8"/>
+  <rect x="864" y="185" width="24" height="3" fill="#6366f1" opacity="0.8"/>
+  <rect x="885" y="161" width="3" height="24" fill="#6366f1" opacity="0.8"/>
+
+  <!-- Decorative dots above the title -->
+  <circle cx="450" cy="24" r="3" fill="#a855f7" opacity="0.5">
+    <animate attributeName="opacity" values="0.2;0.8;0.2" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="420" cy="24" r="2" fill="#6366f1" opacity="0.3">
+    <animate attributeName="opacity" values="0.1;0.6;0.1" dur="2.5s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="480" cy="24" r="2" fill="#6366f1" opacity="0.3">
+    <animate attributeName="opacity" values="0.1;0.6;0.1" dur="3s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ===== Signature element: the eye, locked inside a slow-rotating targeting reticle ===== -->
+  <g transform="translate(140 100)">
+    <!-- outer rotating reticle: dashed ring with tick marks, like a scope acquiring a target -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0" to="360" dur="14s" repeatCount="indefinite"/>
+      <circle r="42" fill="none" stroke="#a855f7" stroke-width="1" opacity="0.45" stroke-dasharray="2,7"/>
+      <line x1="0" y1="-42" x2="0" y2="-34" stroke="#c084fc" stroke-width="1.5" opacity="0.7"/>
+      <line x1="0" y1="34" x2="0" y2="42" stroke="#c084fc" stroke-width="1.5" opacity="0.7"/>
+      <line x1="-42" y1="0" x2="-34" y2="0" stroke="#c084fc" stroke-width="1.5" opacity="0.7"/>
+      <line x1="34" y1="0" x2="42" y2="0" stroke="#c084fc" stroke-width="1.5" opacity="0.7"/>
+    </g>
+    <!-- inner counter-rotating ring for a parallax "locking on" feel -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="360" to="0" dur="9s" repeatCount="indefinite"/>
+      <circle r="31" fill="none" stroke="#6366f1" stroke-width="1" opacity="0.4" stroke-dasharray="1,5"/>
+    </g>
+    <!-- soft ambient glow behind the eye -->
+    <ellipse rx="50" ry="28" fill="none" stroke="#7c3aed" stroke-width="2" opacity="0.4" filter="url(#glow)">
+      <animate attributeName="opacity" values="0.2;0.6;0.2" dur="3s" repeatCount="indefinite"/>
+    </ellipse>
+    <!-- the eye itself -->
+    <circle r="14" fill="#1e1b4b" stroke="#a855f7" stroke-width="1.5" filter="url(#glow)"/>
+    <circle r="8" fill="#7c3aed">
+      <animate attributeName="r" values="7;9;7" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="3" cy="-3" r="2.5" fill="#e879f9" opacity="0.9"/>
+  </g>
+
+  <!-- Scan lines radiating from the eye toward the title -->
+  <line x1="192" y1="88" x2="230" y2="72" stroke="#7c3aed" stroke-width="1" opacity="0.3" stroke-dasharray="4,3">
+    <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2s" repeatCount="indefinite"/>
+  </line>
+  <line x1="192" y1="100" x2="230" y2="100" stroke="#6366f1" stroke-width="1" opacity="0.4" stroke-dasharray="4,3">
+    <animate attributeName="opacity" values="0.2;0.6;0.2" dur="1.8s" repeatCount="indefinite"/>
+  </line>
+  <line x1="192" y1="112" x2="230" y2="128" stroke="#7c3aed" stroke-width="1" opacity="0.3" stroke-dasharray="4,3">
+    <animate attributeName="opacity" values="0.1;0.5;0.1" dur="2.4s" repeatCount="indefinite"/>
+  </line>
+
+  <!-- Main title -->
+  <text x="450" y="88" text-anchor="middle" font-family="'Courier New', Courier, monospace"
+        font-size="46" font-weight="bold" fill="url(#textGrad)" filter="url(#softglow)"
+        letter-spacing="4">GODSEYE: EX</text>
+
+  <!-- Tagline -->
+  <text x="450" y="120" text-anchor="middle" font-family="'Courier New', Courier, monospace"
+        font-size="14" fill="#a5b4fc" letter-spacing="6" opacity="0.85">
+    STATIC EXTENSION ANALYSIS ENGINE
+  </text>
+
+  <!-- Bottom stats line -->
+  <text x="450" y="158" text-anchor="middle" font-family="'Courier New', Courier, monospace"
+        font-size="11" fill="#6366f1" letter-spacing="2" opacity="0.7">
+    16 MODULES  ·  SINGLE-PASS TOKENIZER  ·  TAINT ANALYSIS  ·  BRIDGE MATRIX  ·  14 CHAIN RULES
+  </text>
+
+  <!-- Divider lines -->
+  <line x1="60" y1="135" x2="840" y2="135" stroke="url(#lineGrad)" stroke-width="0.75" opacity="0.4"/>
+  <line x1="60" y1="172" x2="840" y2="172" stroke="url(#lineGrad)" stroke-width="0.5" opacity="0.25"/>
+</svg>
