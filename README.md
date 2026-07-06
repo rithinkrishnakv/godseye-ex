@@ -207,8 +207,6 @@ Scores come from real **CVSS v3.1 base score calculation** (FIRST.org formula), 
 
 ---
 
-<<<<<<< HEAD
-=======
 ## Contributing
 
 Want to add a detection module or a chain rule? See [`CONTRIBUTING.md`](CONTRIBUTING.md)
@@ -216,7 +214,6 @@ for the project layout, the module/chain extension points, and how to add tests.
 
 ---
 
->>>>>>> 38a7ca3 (Move module/chain contributor guide to CONTRIBUTING.md)
 ## Coverage & Limitations
 
 **Works well on:** readable, unminified JS/HTML with a valid `manifest.json` (MV2 or MV3, Chrome/Edge/Firefox).
